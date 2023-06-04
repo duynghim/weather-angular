@@ -1,0 +1,28 @@
+<div class="weather-container">
+  <div [ngClass]="(isUndefined(weather) ? ((weather.main.temp > 16) ? 'app warm' : 'app') : 'app')">
+    <main>
+      <div class="search-box">
+        <input
+          type="text"
+          class="search-bar"
+          placeholder="Search..."
+          [(ngModel)]="query"
+          name="query"
+          (keyup.enter)="search()"
+        />
+      </div>
+      <div *ngIf="isUndefined(weather)">
+        <div class="location-box">
+          <div class="location">{{weather.name}}, {{weather.sys.country}}</div>
+          <div class="date">{{dateBuilder()}}</div>
+        </div>
+        <div class="weather-box">
+          <div class="temp">
+            {{roundTemp(weather)}}
+          </div>
+          <div class="weather">{{weather.weather[0].main}}</div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
